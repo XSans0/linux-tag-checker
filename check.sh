@@ -30,27 +30,34 @@ send_msg() {
 }
 
 TAG=$(cat 4.14-y)
+TOTAL="0"
 
-wget https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile -O tag.txt
+while [[ "$TOTAL" != "55" ]]; do
 
-if [[ ! -z "$(cat tag.txt | grep '<span class="lit">'$TAG'</span>')" ]];then
-    msg "* New linux 4.14-stable detected"
-    send_msg "<b>New linux 4.14-stable detected</b>" \
-            "" \
-            "<b>Version : </b><code>$TAG</code>" \
-            "<b>Source : </b><a href='https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable'>android-4.14-stable</a>" \
-            "" \
-            "<b> When upstream?</b>"
+    wget https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile -O tag.txt
 
-    TAG=$(($TAG+1))
-    echo "$TAG" > "4.14-y"
-fi
+    if [[ ! -z "$(cat tag.txt | grep '<span class="lit">'$TAG'</span>')" ]];then
+        msg "* New linux 4.14-stable detected"
+        send_msg "<b>New linux 4.14-stable release available!</b>" \
+                "" \
+                "<b>Version : </b><code>4.14.$TAG</code>" \
+                "<b>Source : </b><a href='https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable'>android-4.14-stable</a>" \
+                "" \
+                "<b> When upstream?</b>"
 
-# Git Configs
-git config --global user.name "XSans0"
-git config --global user.email "xsansdroid@gmail.com"
+        TAG=$(($TAG+1))
+        echo "$TAG" > "4.14-y"
 
-# Create & push commits
-git add 4.14-y
-git commit -sm "Update for next notification"
-git push
+        # Git Configs
+        git config --global user.name "XSans0"
+        git config --global user.email "xsansdroid@gmail.com"
+
+        # Create & push commits
+        git add 4.14-y
+        git commit -sm "Update for next notification"
+        git push
+    fi
+    rm -rf tag.txt
+    sleep 1m
+    TOTAL=$(($TOTAL+1))
+done
