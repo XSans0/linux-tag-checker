@@ -10,7 +10,7 @@ err() {
     echo -e "\e[1;31m$*\e[0m"
 }
 
-if [[ -z "$TELEGRAM_TOKEN" ]] || [[ -z "$CHANNEL_ID" ]]; then
+if [[ -z "$TELEGRAM_TOKEN" ]] || [[ -z "$TELEGRAM_CHAT" ]]; then
     err "* Something is missing!"
 fi
 
@@ -21,7 +21,7 @@ git clone --depth=1 https://github.com/XSans02/Telegram Telegram
 TELEGRAM=Telegram/telegram
 
 send_msg() {
-  "${TELEGRAM}" -c "${CHANNEL_ID}" -H -D \
+  "${TELEGRAM}" -H -D \
       "$(
           for POST in "${@}"; do
               echo "${POST}"
