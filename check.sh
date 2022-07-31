@@ -32,7 +32,7 @@ send_msg() {
 TAG=$(cat 4.14-y)
 TOTAL="0"
 
-while [[ "$TOTAL" != "55" ]]; do
+while [[ "$TOTAL" != "52" ]]; do
 
     wget https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile -O tag.txt
 
