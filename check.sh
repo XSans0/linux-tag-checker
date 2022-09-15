@@ -31,29 +31,55 @@ send_msg() {
       )"
 }
 
-TAG=$(cat 4.14-y)
 TOTAL="0"
-
 while [[ "$TOTAL" != "52" ]]; do
-    if [[ "$(curl https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile | grep '<span class="lit">'$TAG'</span>')" ]];then
-        msg "* New linux 4.14-stable detected"
-        send_msg "<b>New linux 4.14-stable release available!</b>" \
+    # Check git
+    TAG="$(cat git/4.14-y)"
+    msg "* [ Git ] Checking..."
+    if [[ "$(curl -s https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/plain/Makefile?h=linux-4.14.y | grep "SUBLEVEL = $TAG")" ]];then
+        msg "* New linux-4.14 detected"
+        send_msg "<b>[ Git ] New linux-4.14 Series Available!</b>" \
                 "" \
-                "<b>Version : </b><code>4.14.$TAG</code>" \
-                "<b>Source : </b><a href='https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable'>android-4.14-stable</a>" \
+                "<b>Version : </b><code>v4.14.$TAG</code>" \
+                "<b>Source : </b><a href='https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/log/?h=linux-4.14.y'>linux-4.14.y</a>" \
                 "" \
                 "<b> When upstream?</b>"
 
         TAG=$(($TAG+1))
-        echo "$TAG" > "4.14-y"
+        echo "$TAG" > "git/4.14-y"
 
         # Git Configs
         git config --global user.name "XSans0"
         git config --global user.email "xsansdroid@gmail.com"
 
         # Create & push commits
-        git add 4.14-y
-        git commit -sm "Update for next notification"
+        git add git/4.14-y
+        git commit -sm "[Git] Update for next notification"
+        git push
+    fi
+
+    # Check common
+    TAG="$(cat common/4.14-y)"
+    msg "* [ Common ] Checking..."
+    if [[ "$(curl -s https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile | grep '<span class="lit">'$TAG'</span>')" ]];then
+        msg "* New linux-4.14 detected"
+        send_msg "<b>[ Common ] New linux-4.14 Series Available!</b>" \
+                "" \
+                "<b>Version : </b><code>v4.14.$TAG</code>" \
+                "<b>Source : </b><a href='https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable'>android-4.14-stable</a>" \
+                "" \
+                "<b> When upstream?</b>"
+
+        TAG=$(($TAG+1))
+        echo "$TAG" > "common/4.14-y"
+
+        # Git Configs
+        git config --global user.name "XSans0"
+        git config --global user.email "xsansdroid@gmail.com"
+
+        # Create & push commits
+        git add common/4.14-y
+        git commit -sm "[Common] Update for next notification"
         git push
     fi
     sleep 1m
