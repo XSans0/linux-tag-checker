@@ -31,6 +31,10 @@ send_msg() {
       )"
 }
 
+# Git Configs
+git config --global user.name "XSans0"
+git config --global user.email "xsansdroid@gmail.com"
+
 TOTAL="0"
 while [[ "$TOTAL" != "52" ]]; do
     # Check git
@@ -47,10 +51,6 @@ while [[ "$TOTAL" != "52" ]]; do
 
         TAG=$(($TAG+1))
         echo "$TAG" > "git/4.14-y"
-
-        # Git Configs
-        git config --global user.name "XSans0"
-        git config --global user.email "xsansdroid@gmail.com"
 
         # Create & push commits
         git add git/4.14-y
@@ -72,10 +72,6 @@ while [[ "$TOTAL" != "52" ]]; do
 
         TAG=$(($TAG+1))
         echo "$TAG" > "common/4.14-y"
-
-        # Git Configs
-        git config --global user.name "XSans0"
-        git config --global user.email "xsansdroid@gmail.com"
 
         # Create & push commits
         git add common/4.14-y
