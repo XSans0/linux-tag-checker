@@ -33,10 +33,7 @@ TAG=$(cat 4.14-y)
 TOTAL="0"
 
 while [[ "$TOTAL" != "52" ]]; do
-
-    wget https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile -O tag.txt
-
-    if [[ ! -z "$(cat tag.txt | grep '<span class="lit">'$TAG'</span>')" ]];then
+    if [[ "$(curl https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile | grep '<span class="lit">'$TAG'</span>')" ]];then
         msg "* New linux 4.14-stable detected"
         send_msg "<b>New linux 4.14-stable release available!</b>" \
                 "" \
@@ -57,7 +54,6 @@ while [[ "$TOTAL" != "52" ]]; do
         git commit -sm "Update for next notification"
         git push
     fi
-    rm -rf tag.txt
     sleep 1m
     TOTAL=$(($TOTAL+1))
 done
