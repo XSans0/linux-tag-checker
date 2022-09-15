@@ -10,8 +10,10 @@ err() {
     echo -e "\e[1;31m$*\e[0m"
 }
 
+# Environment checker
 if [[ -z "$TELEGRAM_TOKEN" ]] || [[ -z "$TELEGRAM_CHAT" ]]; then
     err "* Something is missing!"
+    exit
 fi
 
 # Clone telegram source
