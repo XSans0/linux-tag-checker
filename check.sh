@@ -51,11 +51,12 @@ while [[ "$TOTAL" != "52" ]]; do
     URL="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/log/?h=linux-4.14.y"
     URL_NAME="linux-4.14.y"
     msg "* [ Git ] Checking..."
-    if [[ "$(curl -s https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/plain/Makefile?h=linux-4.14.y | grep "SUBLEVEL = $TAG")" ]];then
+    if curl -s https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/plain/Makefile?h=linux-4.14.y | grep "SUBLEVEL = $TAG"
+    then
         msg "* New linux-4.14 detected"
         linux_msg
 
-        TAG=$(($TAG+1))
+        TAG=$((TAG + 1))
         echo "$TAG" > "git/4.14-y"
 
         # Create & push commits
@@ -70,11 +71,12 @@ while [[ "$TOTAL" != "52" ]]; do
     URL="https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable"
     URL_NAME="android-4.14-stable"
     msg "* [ Common ] Checking..."
-    if [[ "$(curl -s https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile | grep '<span class="lit">'$TAG'</span>')" ]];then
+    if curl -s https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile | grep '<span class="lit">'"$TAG"'</span>'
+    then
         msg "* New linux-4.14 detected"
         linux_msg
 
-        TAG=$(($TAG+1))
+        TAG=$((TAG + 1))
         echo "$TAG" > "common/4.14-y"
 
         # Create & push commits
@@ -83,5 +85,5 @@ while [[ "$TOTAL" != "52" ]]; do
         git push
     fi
     sleep 1m
-    TOTAL=$(($TOTAL+1))
+    TOTAL=$((TOTAL + 1))
 done
