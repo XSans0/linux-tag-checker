@@ -51,7 +51,7 @@ while [[ "$TOTAL" != "52" ]]; do
     URL="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/log/?h=linux-4.14.y"
     URL_NAME="linux-4.14.y"
     msg "* [ Git ] Checking..."
-    if curl -s https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/plain/Makefile?h=linux-4.14.y | grep "SUBLEVEL = $TAG"
+    if curl -s https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/plain/Makefile?h=linux-4.14.y | grep -q "SUBLEVEL = $TAG"
     then
         msg "* New linux-4.14 detected"
         linux_msg
@@ -71,7 +71,7 @@ while [[ "$TOTAL" != "52" ]]; do
     URL="https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable"
     URL_NAME="android-4.14-stable"
     msg "* [ Common ] Checking..."
-    if curl -s https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile | grep '<span class="lit">'"$TAG"'</span>'
+    if curl -s https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile | grep -q '<span class="lit">'"$TAG"'</span>'
     then
         msg "* New linux-4.14 detected"
         linux_msg
