@@ -86,4 +86,7 @@ while [[ "$TOTAL" != "52" ]]; do
     fi
     sleep 1m
     TOTAL=$((TOTAL + 1))
+
+    # Sync source
+    git pull
 done
