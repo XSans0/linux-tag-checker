@@ -65,12 +65,33 @@ while [[ "$TOTAL" != "52" ]]; do
         git push
     fi
 
-    # Check common
-    TAG="$(cat common/4.14-y)"
+    # Common
     TYPE="Common"
     URL="https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable"
     URL_NAME="android-4.14-stable"
+
+    # We only run this if git & common tags are not the same
+    if [ "$(cat git/4.14-y)" != "$(cat common/4.14-y)" ]; then
+        msg "* Git & Common tags are not the same!"
+        if curl -s https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile | grep -q '<span class="lit">'"$TAG"'</span>'
+        then
+            msg "* New linux-4.14 detected"
+            linux_msg
+
+            TAG=$((TAG + 1))
+            echo "$TAG" > "common/4.14-y"
+
+            # Create & push commits
+            git add common/4.14-y
+            git commit -sm "[Common] Update for next notification"
+            git push
+        fi
+    fi
+
+    # Check common
+    TAG="$(cat common/4.14-y)"
     msg "* [ Common ] Checking..."
+
     if curl -s https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile | grep -q '<span class="lit">'"$TAG"'</span>'
     then
         msg "* New linux-4.14 detected"
@@ -84,6 +105,7 @@ while [[ "$TOTAL" != "52" ]]; do
         git commit -sm "[Common] Update for next notification"
         git push
     fi
+
     sleep 1m
     TOTAL=$((TOTAL + 1))
 
