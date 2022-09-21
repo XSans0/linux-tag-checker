@@ -31,10 +31,10 @@ send_msg() {
       )"
 }
 linux_msg(){
-    send_msg "<b>[ $TYPE ] New linux-4.14 Series Available!</b>" \
+    send_msg "<b>[ $1 ] New linux-4.14 Series Available!</b>" \
                 "" \
                 "<b>Version : </b><code>v4.14.$TAG</code>" \
-                "<b>Source : </b><a href='$URL'>$URL_NAME</a>" \
+                "<b>Source : </b><a href='$2'>$3</a>" \
                 "" \
                 "<b> When upstream?</b>"
 }
@@ -47,14 +47,11 @@ TOTAL="0"
 while [[ "$TOTAL" != "52" ]]; do
     # Check git
     TAG="$(cat git/4.14-y)"
-    TYPE="Git"
-    URL="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/log/?h=linux-4.14.y"
-    URL_NAME="linux-4.14.y"
     msg "* [ Git ] Checking..."
     if curl -s https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/plain/Makefile?h=linux-4.14.y | grep -q "SUBLEVEL = $TAG"
     then
         msg "* New linux-4.14 detected"
-        linux_msg
+        linux_msg "Git" "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/log/?h=linux-4.14.y" "linux-4.14.y"
 
         TAG=$((TAG + 1))
         echo "$TAG" > "git/4.14-y"
@@ -65,18 +62,13 @@ while [[ "$TOTAL" != "52" ]]; do
         git push
     fi
 
-    # Common
-    TYPE="Common"
-    URL="https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable"
-    URL_NAME="android-4.14-stable"
-
     # We only run this if git & common tags are not the same
     if [ "$(cat git/4.14-y)" != "$(cat common/4.14-y)" ]; then
         msg "* Git & Common tags are not the same!"
         if curl -s https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile | grep -q '<span class="lit">'"$TAG"'</span>'
         then
             msg "* New linux-4.14 detected"
-            linux_msg
+            linux_msg "Common" "https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable" "android-4.14-stable"
 
             TAG=$((TAG + 1))
             echo "$TAG" > "common/4.14-y"
@@ -95,7 +87,7 @@ while [[ "$TOTAL" != "52" ]]; do
     if curl -s https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile | grep -q '<span class="lit">'"$TAG"'</span>'
     then
         msg "* New linux-4.14 detected"
-        linux_msg
+        linux_msg "Common" "https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable" "android-4.14-stable"
 
         TAG=$((TAG + 1))
         echo "$TAG" > "common/4.14-y"
