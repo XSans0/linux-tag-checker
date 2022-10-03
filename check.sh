@@ -33,6 +33,7 @@ send_msg() {
 linux_msg(){
     send_msg "<b>[ $1 ] New linux-4.14 Series Available!</b>" \
                 "" \
+                "<b>Release date : </b><code>$(date +%Y-%m-%d)</code>" \
                 "<b>Version : </b><code>v4.14.$TAG</code>" \
                 "<b>Source : </b><a href='$2'>$3</a>" \
                 "" \
