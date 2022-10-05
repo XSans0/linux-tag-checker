@@ -48,7 +48,7 @@ TOTAL="0"
 while [[ "$TOTAL" != "52" ]]; do
     # Check git
     TAG="$(cat git/4.14-y)"
-    msg "* [ Git ] Checking..."
+    msg "* [ Git ] Checking v4.14.$TAG"
     if curl -s https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/plain/Makefile?h=linux-4.14.y | grep -q "SUBLEVEL = $TAG"
     then
         msg "* New linux-4.14 detected"
@@ -69,7 +69,7 @@ while [[ "$TOTAL" != "52" ]]; do
     TRY_AGAIN="0"
     
     while [ "$TRY_AGAIN" != "5" ]; do
-        msg "* [ Common ] Checking $TRY_AGAIN ..."
+        msg "* [ Common ] Checking v4.14.$TAG"
 
         if curl -s https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile | grep -q '<span class="lit">'"$TAG"'</span>'
         then
