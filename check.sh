@@ -92,5 +92,5 @@ while [[ "$TOTAL" != "52" ]]; do
     TOTAL=$((TOTAL + 1))
 
     # Sync source
-    git pull --ff-only
+    git pull -r
 done
