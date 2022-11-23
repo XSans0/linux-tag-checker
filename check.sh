@@ -11,7 +11,7 @@ err() {
 }
 
 # Environment checker
-if [[ -z "$TELEGRAM_TOKEN" ]] || [[ -z "$TELEGRAM_CHAT" ]]; then
+if [[ -z "$TELEGRAM_TOKEN" ]] || [[ -z "$TELEGRAM_CHAT" ]] || [[ -z "$USERNAME" ]] || [[ -z "$EMAIL" ]]; then
     err "* Something is missing!"
     exit
 fi
