@@ -3,8 +3,10 @@
 * This script always running on [github actions](https://github.com/XSansDroid/linux-checker/actions)
 
 # Environment
-* `TELEGRAM_CHAT` Your telegram chat/channel IDs
-* `TELEGRAM_TOKEN` Your telegram bot token
+* `TELEGRAM_CHAT`   | Telegram chat/channel IDs
+* `TELEGRAM_TOKEN`  | Telegram bot token
+* `USERNAME`        | Github username
+* `EMAIL`           | Github email
 
 # Multiple chat/channel IDs
 * Example `TELEGRAM_CHAT=-91826172, -19226181, -19271827`
