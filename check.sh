@@ -41,8 +41,8 @@ linux_msg(){
 }
 
 # Git Configs
-git config --global user.name "XSans0"
-git config --global user.email "xsansdroid@gmail.com"
+git config --global user.name "$USERNAME"
+git config --global user.email "$EMAIL"
 
 TOTAL="0"
 while [[ "$TOTAL" != "52" ]]; do
