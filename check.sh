@@ -59,7 +59,7 @@ while [[ "$TOTAL" != "52" ]]; do
 
         # Create & push commits
         git add git/4.14-y
-        git commit -sm "[ Git ] Update for next notification"
+        git commit -m "[ Git ] Update for next notification"
         git push
     fi
 
@@ -81,7 +81,7 @@ while [[ "$TOTAL" != "52" ]]; do
 
             # Create & push commits
             git add common/4.14-y
-            git commit -sm "[ Common ] Update for next notification"
+            git commit -m "[ Common ] Update for next notification"
             git push
         fi
         TAG=$((TAG + 1))
