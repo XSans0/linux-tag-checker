@@ -37,7 +37,7 @@ linux_msg(){
                 "<b>Version : </b><code>v4.14.$TAG</code>" \
                 "<b>Source : </b><a href='$2'>$3</a>" \
                 "" \
-                "<b> When upstream?</b>"
+                "~@VioletChan_bot"
 }
 
 # Git Configs
