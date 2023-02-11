@@ -11,7 +11,7 @@ err() {
 }
 
 # Environment checker
-if [[ -z "$TELEGRAM_TOKEN" ]] || [[ -z "$TELEGRAM_CHAT" ]] || [[ -z "$USERNAME" ]] || [[ -z "$EMAIL" ]]; then
+if [[ -z "$TELEGRAM_TOKEN" ]] || [[ -z "$TELEGRAM_CHAT" ]]; then
     err "* Something is missing!"
     exit
 fi
@@ -39,10 +39,6 @@ linux_msg() {
         "" \
         "~@VioletChan_bot"
 }
-
-# Git Configs
-git config --global user.name "$USERNAME"
-git config --global user.email "$EMAIL"
 
 TOTAL="0"
 while [[ "$TOTAL" != "52" ]]; do

@@ -5,8 +5,6 @@
 # Environment
 * `TELEGRAM_CHAT`   | Telegram chat/channel IDs
 * `TELEGRAM_TOKEN`  | Telegram bot token
-* `USERNAME`        | Github username
-* `EMAIL`           | Github email
 
 # Multiple chat/channel IDs
 * Example `TELEGRAM_CHAT=-91826172, -19226181, -19271827`
