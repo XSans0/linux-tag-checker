@@ -1,6 +1,6 @@
 # Linux Tag Checker
 * Simple script for linux kernel checker
-* This script always running on [github actions](https://github.com/XSansDroid/linux-checker/actions)
+* This script always running on [github actions](https://github.com/XSansDroid/github-actions/actions/workflows/linux.yml)
 
 # Environment
 * `TELEGRAM_CHAT`   | Telegram chat/channel IDs
