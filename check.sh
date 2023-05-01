@@ -34,8 +34,8 @@ linux_msg() {
     send_msg \
         "<b>New Linux-4.14 Series Available!</b>" \
         "" \
-        "<b>Release date : </b><code>$(date +%Y-%m-%d)</code>" \
-        "<b>Version : </b><code>v4.14.$TAG</code>" \
+        "<b>Release date : </b><i>$(date +%Y-%m-%d)</i>" \
+        "<b>Version : </b><i>v4.14.$TAG</i>" \
         "<b>Source : </b><a href='$1'>$2</a>" \
         "" \
         "<b>Let's upstream it!</b>"
