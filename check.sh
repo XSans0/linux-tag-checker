@@ -31,13 +31,14 @@ send_msg() {
         )"
 }
 linux_msg() {
-    send_msg "<b>[ $1 ] New linux-4.14 Series Available!</b>" \
+    send_msg \
+        "<b>New Linux-4.14 Series Available!</b>" \
         "" \
         "<b>Release date : </b><code>$(date +%Y-%m-%d)</code>" \
         "<b>Version : </b><code>v4.14.$TAG</code>" \
-        "<b>Source : </b><a href='$2'>$3</a>" \
+        "<b>Source : </b><a href='$1'>$2</a>" \
         "" \
-        "~@VioletChan_bot"
+        "<b>Let's upstream it!</b>"
 }
 
 TOTAL="0"
@@ -47,7 +48,7 @@ while [[ "$TOTAL" != "52" ]]; do
     msg "* [ Git ] Checking v4.14.$TAG"
     if curl -s https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/plain/Makefile?h=linux-4.14.y | grep -q "SUBLEVEL = $TAG"; then
         msg "* New linux-4.14 detected"
-        linux_msg "Git" "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/log/?h=linux-4.14.y" "linux-4.14.y"
+        linux_msg "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/log/?h=linux-4.14.y" "git.kernel.org"
 
         TAG=$((TAG + 1))
         echo "$TAG" >"git/4.14-y"
@@ -68,7 +69,7 @@ while [[ "$TOTAL" != "52" ]]; do
 
         if curl -s https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable/Makefile | grep -q '<span class="lit">'"$TAG"'</span>'; then
             msg "* New linux-4.14 detected"
-            linux_msg "Common" "https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable" "android-4.14-stable"
+            linux_msg "https://android.googlesource.com/kernel/common/+/refs/heads/android-4.14-stable" "android.googlesource.com"
 
             TAG=$((TAG + 1))
             echo "$TAG" >"common/4.14-y"
