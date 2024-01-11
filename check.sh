@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright ©2022-2023 XSans0
+# Copyright ©2022-2024 XSans0
 
 # Function to show an informational message
 msg() {

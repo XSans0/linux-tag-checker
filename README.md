@@ -1,6 +1,6 @@
 # Linux Tag Checker
 * Simple script for linux kernel checker
-* This script always running on [github actions](https://github.com/XSansDroid/github-actions/actions/workflows/linux.yml)
+* This script stop running, because linux-4.14.x has been EOL ( End Of Life )
 
 # Environment
 * `TELEGRAM_CHAT`   | Telegram chat/channel IDs
